@@ -1,24 +1,35 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Players from './components/Players/Players';
+import Cart from './components/Cart/Cart';
+import Promo from './components/Promo/Promo';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
+  const [cart, setCart] = useState([]);
+  const addToCartHandler = product => {
+    const newCart = [...cart, product];
+    setCart(newCart);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      
+      <Promo></Promo>
+      <main className="py-3">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-9">
+              <Players addToCartHandler={addToCartHandler}></Players>
+            </div>
+            <div className="col-lg-3">
+              <Cart cart={cart}></Cart>
+            </div>
+          </div>
+        </div>
+      </main>
+    
+    </>
   );
 }
 
